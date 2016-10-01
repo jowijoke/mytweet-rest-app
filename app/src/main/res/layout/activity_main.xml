@@ -10,8 +10,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.wit.mytweet.MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/welcomeSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="signUpPressed"
+        android:text="@string/welcomeSignup" />
+
+    <Button
+        android:id="@+id/welcomeLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:onClick="loginPressed"
+        android:text="@string/welcomeLogin" />
 </RelativeLayout>
