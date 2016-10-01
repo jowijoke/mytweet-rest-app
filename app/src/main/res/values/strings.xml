@@ -2,4 +2,9 @@
     <string name="app_name">MyTweet</string>
     <string name="welcomeSignup">Sign up</string>
     <string name="welcomeLogin">Login</string>
+    <string name="signupTitle">Sign up to MyTweet here</string>
+    <string name="signupFirstname">First Name</string>
+    <string name="signupLastName">Last Name</string>
+    <string name="signupEmail">Email</string>
+    <string name="signupPassword">Password</string>
 </resources>
