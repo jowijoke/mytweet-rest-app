@@ -11,15 +11,6 @@
     tools:context=".activities.Welcome">
 
     <Button
-        android:id="@+id/welcomeSignup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="signUpPressed"
-        android:text="@string/welcomeSignup" />
-
-    <Button
         android:id="@+id/welcomeLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,4 +19,13 @@
         android:layout_marginTop="102dp"
         android:onClick="loginPressed"
         android:text="@string/welcomeLogin" />
+
+    <Button
+        android:id="@+id/welcomeSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="signUpPressed"
+        android:text="@string/welcomeSignup" />
 </RelativeLayout>

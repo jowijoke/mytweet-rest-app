@@ -13,4 +13,6 @@
     <string name="loginPassword">Password</string>
     <string name="loginSignIn">Sign in</string>
     <string name="loginSubtitle">You must be registered to Login</string>
+    <string name="title_activity_login">Login</string>
+    <string name="signupRegister">Register</string>
 </resources>
