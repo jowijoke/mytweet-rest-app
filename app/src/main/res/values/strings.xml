@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">MyTweet</string>
     <string name="welcomeSignup">Sign up</string>
+    <string name="signupSubtitle">Enter details below</string>
     <string name="welcomeLogin">Login</string>
     <string name="signupTitle">Sign up to MyTweet here</string>
     <string name="signupFirstname">First Name</string>
     <string name="signupLastName">Last Name</string>
     <string name="signupEmail">Email</string>
     <string name="signupPassword">Password</string>
+    <string name="loginTitle">Login to MyTweet</string>
+    <string name="loginEmail">Email</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginSignIn">Sign in</string>
+    <string name="loginSubtitle">You must be registered to Login</string>
 </resources>
