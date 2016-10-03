@@ -17,14 +17,6 @@ public class MyTweetApp extends Application {
 
     public List<User> users = new ArrayList<User>();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        info(this, "MyTweet app launched");
-
-
-    }
-
     public void newUser(User user) {
         users.add(user);
     }
@@ -37,6 +29,16 @@ public class MyTweetApp extends Application {
         }
         return false;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        info(this, "MyTweet app launched");
+
+
+    }
+
+
 
 
 }

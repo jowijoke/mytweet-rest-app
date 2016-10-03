@@ -62,6 +62,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:onClick="signInPressed"
         android:text="@string/loginSignIn" />
 </RelativeLayout>
