@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.wit.mytweet.R;
 
+import static org.wit.android.helpers.LogHelpers.info;
+
 
 public class Welcome extends AppCompatActivity implements View.OnClickListener {
-    public Button Login;
-    public Button Signup;
+    public Button login;
+    public Button signup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,25 +22,27 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener {
         setTitle(R.string.app_name);
         setContentView(R.layout.welcome_activity);
 
-        Login = (Button) findViewById(R.id.welcomeLogin);
-        Signup = (Button) findViewById(R.id.welcomeSignup);
+        login = (Button) findViewById(R.id.welcomeLogin);
+        signup = (Button) findViewById(R.id.welcomeSignup);
 
-        Login.setOnClickListener(this);
-        Signup.setOnClickListener(this);
+        login.setOnClickListener(this);
+        signup.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.welcomeLogin:
-                Intent Login = (new Intent(this, Login.class));
-                startActivity(Login);
+                Toast.makeText(this, "Login pressed", Toast.LENGTH_SHORT).show();
+                info(this, "Login Pressed");
+                startActivity(new Intent(this, Login.class));
                 break;
 
 
             case R.id.welcomeSignup:
-                Intent Signup = (new Intent(this, Signup.class));
-                startActivity(Signup);
+                startActivity(new Intent(this, Signup.class));
+                Toast.makeText(this, "Signup pressed", Toast.LENGTH_SHORT).show();
+                info(this, "Signup Pressed");
                 break;
 
         }
