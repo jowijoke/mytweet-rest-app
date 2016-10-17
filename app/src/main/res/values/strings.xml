@@ -19,4 +19,7 @@
     <string name="signupRegister">Register</string>
     <string name="tweetButton">Tweet</string>
     <string name="tweet">Whats on your mind?</string>
+    <string name="delete_tweet">Delete Tweet</string>
+    <string name="new_tweet">New Tweet</string>
+    <string name="settings">Settings</string>
 </resources>
