@@ -72,7 +72,7 @@ public class TweetListFragment extends ListFragment implements OnItemClickListen
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.residencelist, menu);
+        inflater.inflate(R.menu.tweetlist, menu);
     }
 
     @Override
