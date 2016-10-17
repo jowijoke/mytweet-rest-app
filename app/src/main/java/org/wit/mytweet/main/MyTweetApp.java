@@ -2,10 +2,8 @@ package org.wit.mytweet.main;
 
 import android.app.Application;
 
-import org.wit.mytweet.models.User;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.wit.mytweet.models.Portfolio;
+import org.wit.mytweet.models.PortfolioSerializer;
 
 import static org.wit.android.helpers.LogHelpers.info;
 
@@ -14,31 +12,23 @@ import static org.wit.android.helpers.LogHelpers.info;
  */
 
 public class MyTweetApp extends Application {
+    public Portfolio portfolio;
+    private static final String FILENAME = "portfolio.json";
+    protected static MyTweetApp app;
 
-    public List<User> users = new ArrayList<User>();
-
-    public void newUser(User user) {
-        users.add(user);
-    }
-
-    public boolean validUser(String email, String password) {
-        for (User user : users) {
-            if (user.email.equals(email) && user.password.equals(password)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
+        PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
         info(this, "TweetListActivity app launched");
 
 
     }
 
-
-
+    public static MyTweetApp getApp() {
+        return app;
+    }
 
 }

@@ -14,9 +14,7 @@ public class Tweet {
     public long id;
     public String message;
     public Long date;
-    public String user;
 
-    private static final String JSON_USER = "user";
     private static final String JSON_ID = "id";
     private static final String JSON_MESSAGE = "message";
     private static final String JSON_DATE = "date";
@@ -27,7 +25,6 @@ public class Tweet {
         id = new Random().nextLong();
         this.message = message;
         date = new Date().getTime();
-        this.user = user;
     }
 
     /**
@@ -52,7 +49,6 @@ public class Tweet {
     public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
         json.put(JSON_ID, Long.toString(id));
-        json.put(JSON_USER, user);
         json.put(JSON_DATE, date);
         json.put(JSON_MESSAGE, message);
         return json;
