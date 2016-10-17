@@ -59,7 +59,6 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_tweet, parent, false);
         addListeners(v);
-        updateControls(tweet);
 
         return v;
     }
@@ -78,7 +77,7 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void updateControls(Tweet tweet) {
+    public void updateControls() {
 
     }
 

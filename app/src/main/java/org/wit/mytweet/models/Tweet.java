@@ -25,10 +25,9 @@ public class Tweet {
     private static final String JSON_DATE = "date";
 
 
-    public Tweet(String message, String user) {
+    public Tweet() {
         id = unsignedLong();
         id = new Random().nextLong();
-        this.message = message;
         date = new Date().getTime();
         contact = ": none presently";
     }

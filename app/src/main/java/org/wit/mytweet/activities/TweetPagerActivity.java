@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -14,10 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.wit.mytweet.R;
+import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
 
 import java.util.ArrayList;
+
+import static org.wit.android.helpers.LogHelpers.info;
 
 public class TweetPagerActivity extends AppCompatActivity implements TextWatcher, ViewPager.OnPageChangeListener {
     private ViewPager viewPager;
@@ -32,6 +34,15 @@ public class TweetPagerActivity extends AppCompatActivity implements TextWatcher
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         setContentView(R.layout.fragment_tweet);
+        viewPager = new ViewPager(this);
+        viewPager.setId(R.id.viewPager);
+        setContentView(viewPager);
+        setTweetList();
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tweets);
+        viewPager.setAdapter(pagerAdapter);
+        setCurrentItem();
+        viewPager.addOnPageChangeListener(this);
+
 
         editTweet = (EditText) findViewById(R.id.editTweet);
         countdown = (TextView) findViewById(R.id.countdown);
@@ -39,6 +50,26 @@ public class TweetPagerActivity extends AppCompatActivity implements TextWatcher
         editTweet.addTextChangedListener(this);
 
     }
+
+    private void setTweetList() {
+        MyTweetApp app = (MyTweetApp) getApplication();
+        portfolio = app.portfolio;
+        tweets = portfolio.tweets;
+    }
+
+    /*
+* Ensure selected Tweet is shown in details view
+*/
+    private void setCurrentItem() {
+        Long tweetId = (Long) getIntent().getSerializableExtra(TweetFragment.EXTRA_TWEET_ID);
+        for (int i = 0; i < tweets.size(); i++) {
+            if (tweets.get(i).id == (tweetId)) {
+                viewPager.setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

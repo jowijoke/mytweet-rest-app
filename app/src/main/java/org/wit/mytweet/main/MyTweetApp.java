@@ -22,6 +22,8 @@ public class MyTweetApp extends Application {
         super.onCreate();
         app = this;
         PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
+        portfolio = new Portfolio(serializer);
+
         info(this, "TweetListActivity app launched");
 
 
