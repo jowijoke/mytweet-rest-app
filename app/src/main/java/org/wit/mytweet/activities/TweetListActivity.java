@@ -9,12 +9,12 @@ import org.wit.mytweet.R;
  * Created by User on 02/10/2016.
  */
 
-public class Login extends AppCompatActivity {
-
+public class TweetListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-    }
+        setContentView(R.layout.activity_tweet_list);
 
+
+    }
 }

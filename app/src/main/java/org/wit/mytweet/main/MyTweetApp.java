@@ -33,7 +33,7 @@ public class MyTweetApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        info(this, "MyTweet app launched");
+        info(this, "TweetListActivity app launched");
 
 
     }
