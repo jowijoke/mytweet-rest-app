@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:id="@+id/residence_list_item_geolocation"
+        android:id="@+id/tweet_list_item_message"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tweet_list_item_dateTextView"
-        android:layout_below="@id/residence_list_item_geolocation"
+        android:layout_below="@id/tweet_list_item_message"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingTop="4dp" />

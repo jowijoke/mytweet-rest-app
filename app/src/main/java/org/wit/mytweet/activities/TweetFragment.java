@@ -1,7 +1,6 @@
 package org.wit.mytweet.activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -10,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.support.v4.app.Fragment;
 import org.wit.android.helpers.ContactHelper;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
