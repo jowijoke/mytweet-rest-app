@@ -1,8 +1,11 @@
 package org.wit.mytweet.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,8 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
@@ -23,7 +30,7 @@ import java.util.ArrayList;
  * Created by User on 17/10/2016.
  */
 
-public class TweetListFragment extends ListFragment implements OnItemClickListener, AbsListView.MultiChoiceModeListener {
+public class TweetListFragment extends ListFragment implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
 
     private ListView listView;
     private ArrayList<Tweet> tweets;
@@ -59,7 +66,7 @@ public class TweetListFragment extends ListFragment implements OnItemClickListen
     public void onListItemClick(ListView l, View v, int position, long id) {
         Tweet msg = ((TweetAdapter) getListAdapter()).getItem(position);
         Intent i = new Intent(getActivity(), TweetPagerActivity.class);
-        i.putExtra(TweetFragment.EXTRA_RESIDENCE_ID, msg.id);
+        i.putExtra(TweetFragment.EXTRA_TWEET_ID, msg.id);
         startActivityForResult(i, 0);
     }
 
@@ -92,5 +99,80 @@ public class TweetListFragment extends ListFragment implements OnItemClickListen
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Tweet tweet = adapter.getItem(position);
+        IntentHelper.startActivityWithData(getActivity(), TweetPagerActivity.class, "TWEET_ID", tweet.id);
+    }
 
+    @Override
+    public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
+
+    }
+
+    /* ************ MultiChoiceModeListener methods (begin) *********** */
+    @Override
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+        MenuInflater inflater = actionMode.getMenuInflater();
+        inflater.inflate(R.menu.tweet_list_context, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode actonMode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_item_delete_tweet:
+                deleteResidence(actionMode);
+                return true;
+            default:
+                return false;
+        }
+
+    }
+
+    private void deleteResidence(ActionMode actionMode) {
+        for (int i = adapter.getCount() - 1; i >= 0; i--) {
+            if (listView.isItemChecked(i)) {
+                portfolio.deleteTweet(adapter.getItem(i));
+            }
+        }
+        actionMode.finish();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode actionMode) {
+
+    }
+
+    /* ************ MultiChoiceModeListener methods (end) *********** */
+
+    class TweetAdapter extends ArrayAdapter<Tweet> {
+        private Context context;
+
+        public TweetAdapter(Context context, ArrayList<Tweet> tweets) {
+            super(context, 0, tweets);
+            this.context = context;
+        }
+
+        @SuppressLint("InflateParams")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.list_item_tweet, null);
+            }
+            Tweet tweet = getItem(position);
+
+            TextView dateTextView = (TextView) convertView.findViewById(R.id.tweet_list_item_dateTextView);
+            dateTextView.setText(tweet.getDateString());
+
+            return convertView;
+        }
+    }
 }

@@ -4,7 +4,7 @@
     tools:context="org.wit.myrent.ResidencePagerActivity">
 
     <item
-        android:id="@+id/menu_item_new_residence"
+        android:id="@+id/menu_item_new_tweet"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/new_tweet"
         app:showAsAction="ifRoom|withText" />

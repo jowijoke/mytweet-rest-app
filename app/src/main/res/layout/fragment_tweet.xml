@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/tweetButton"
         android:layout_width="169dp"
         android:layout_height="wrap_content"
-        android:id="@+id/tweetButton"
         android:layout_marginTop="37dp"
         android:text="@string/tweetButton"
         android:layout_alignParentTop="true"
@@ -35,6 +35,22 @@
         android:layout_below="@+id/countdown"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp" />
+
+    <Button
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/contact" />
+
+    <Button
+        android:id="@+id/tweet_EmailButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/emailButton" />
 
 
 </RelativeLayout>

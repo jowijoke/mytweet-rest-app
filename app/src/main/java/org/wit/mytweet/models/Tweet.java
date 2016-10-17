@@ -1,7 +1,10 @@
 package org.wit.mytweet.models;
 
+import android.content.Context;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wit.mytweet.R;
 
 import java.util.Date;
 import java.util.Random;
@@ -14,8 +17,10 @@ public class Tweet {
     public long id;
     public String message;
     public Long date;
+    public String contact;
 
     private static final String JSON_ID = "id";
+    private static final String JSON_CONTACT = "contact";
     private static final String JSON_MESSAGE = "message";
     private static final String JSON_DATE = "date";
 
@@ -25,6 +30,7 @@ public class Tweet {
         id = new Random().nextLong();
         this.message = message;
         date = new Date().getTime();
+        contact = ": none presently";
     }
 
     /**
@@ -51,7 +57,20 @@ public class Tweet {
         json.put(JSON_ID, Long.toString(id));
         json.put(JSON_DATE, date);
         json.put(JSON_MESSAGE, message);
+        json.put(JSON_CONTACT, contact);
         return json;
+    }
+
+    public String getTweetReport(Context context) {
+        String contactUser = contact;
+        if (contact == null) {
+            contactUser = context.getString(R.string.tweet_report_nobody_contact);
+        } else {
+            contactUser = context.getString(R.string.residence_report_contact, contact);
+        }
+        String report = " Date: " + dateString() + " " + contactUser;
+        return report;
+
     }
 
     public String getDateString() {
