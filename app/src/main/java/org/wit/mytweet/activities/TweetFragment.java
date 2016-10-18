@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import org.wit.android.helpers.ContactHelper;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
@@ -23,7 +28,7 @@ import static org.wit.android.helpers.IntentHelper.navigateUp;
  * Created by User on 17/10/2016.
  */
 
-public class TweetFragment extends Fragment implements View.OnClickListener {
+public class TweetFragment extends Fragment implements TextWatcher, View.OnClickListener {
 
     public static final String EXTRA_TWEET_ID = "mytweet.TWEET_ID";
 
@@ -32,6 +37,9 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
     private Button ContactButton;
     private Button EmailButton;
     private Button TweetButton;
+
+    EditText editTweet;
+    TextView countdown;
 
     private Tweet tweet;
     private Portfolio portfolio;
@@ -50,6 +58,7 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;
         tweet = portfolio.getTweet(msgId);
+
     }
 
 
@@ -57,8 +66,9 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_tweet, parent, false);
-        addListeners(v);
 
+        addListeners(v);
+        updateControls(tweet);
         return v;
     }
 
@@ -68,7 +78,10 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
         ContactButton = (Button) v.findViewById(R.id.contact);
         EmailButton = (Button) v.findViewById(R.id.tweet_EmailButton);
         TweetButton = (Button) v.findViewById(R.id.tweetButton);
+        editTweet = (EditText) v.findViewById(R.id.editTweet);
+        countdown = (TextView) v.findViewById(R.id.countdown);
 
+        editTweet.addTextChangedListener(this);
         ContactButton.setOnClickListener(this);
         EmailButton.setOnClickListener(this);
         TweetButton.setOnClickListener(this);
@@ -76,7 +89,7 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void updateControls() {
+    public void updateControls(Tweet tweet) {
 
     }
 
@@ -131,5 +144,23 @@ public class TweetFragment extends Fragment implements View.OnClickListener {
 
 
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        countdown.setText(String.valueOf(140 - s.length()));
+
+
     }
 }
