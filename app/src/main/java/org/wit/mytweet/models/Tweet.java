@@ -30,6 +30,7 @@ public class Tweet {
         id = unsignedLong();
         id = new Random().nextLong();
         date = new Date().getTime();
+        message = "none presently";
         contact = ": none presently";
     }
 

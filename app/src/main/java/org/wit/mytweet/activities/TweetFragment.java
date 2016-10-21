@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.wit.android.helpers.ContactHelper;
+import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
@@ -126,6 +128,18 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tweetButton:
+                if (editTweet.getText().length() > 0) {
+                    IntentHelper.startActivity(getActivity(), TweetListActivity.class);
+                    portfolio.saveTweets();
+                    break;
+                } else {
+
+                    Toast toast = Toast.makeText(getActivity(), "Please enter your message", Toast.LENGTH_SHORT);
+                    toast.show();
+                    break;
+                }
+
             case R.id.contact:
                 Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 startActivityForResult(i, REQUEST_CONTACT);
@@ -133,6 +147,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
                     ContactButton.setText("Tenant: " + tweet.contact);
                 }
                 break;
+
             case R.id.tweet_EmailButton:
                 sendEmail(getActivity(), "emailAddress", getString(R.string.tweet_email_subject), tweet.getTweetReport(getActivity()));
                 break;
