@@ -1,5 +1,6 @@
 package org.wit.mytweet.models;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import org.json.JSONException;
@@ -60,6 +61,7 @@ public class Tweet {
         return json;
     }
 
+    @SuppressLint("StringFormatInvalid")
     public String getTweetReport(Context context) {
         String contactUser = contact;
         if (contact == null) {

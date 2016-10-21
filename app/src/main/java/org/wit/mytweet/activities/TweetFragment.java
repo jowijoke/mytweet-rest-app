@@ -68,7 +68,6 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         View v = inflater.inflate(R.layout.fragment_tweet, parent, false);
 
         addListeners(v);
-        updateControls(tweet);
         return v;
     }
 
@@ -86,10 +85,6 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         EmailButton.setOnClickListener(this);
         TweetButton.setOnClickListener(this);
 
-
-    }
-
-    public void updateControls(Tweet tweet) {
 
     }
 

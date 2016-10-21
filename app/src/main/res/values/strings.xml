@@ -27,4 +27,12 @@
     <string name="tweet_report_nobody_contact">No one to contact </string>
     <string name="residence_report_contact"> In contact </string>
     <string name="tweet_email_subject"> Status</string>
+    <string name="username_summary">Please enter your user name</string>
+    <string name="username">Username</string>
+    <string name="password_summary">You may set your password here</string>
+    <string name="password">Password</string>
+    <string name="nmr_residences_summary">How many Residences to store locally?</string>
+    <string name="nmr_residences">Configure Downloads</string>
+    <string name="set_refresh_interval_summary">Frequency of cloud updates (minutes)</string>
+    <string name="set_refresh_interval">Refresh</string>
 </resources>
