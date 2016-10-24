@@ -30,8 +30,7 @@ public class Tweet {
         id = unsignedLong();
         id = new Random().nextLong();
         date = new Date().getTime();
-        message = "none presently";
-        contact = ": none presently";
+
     }
 
     /**
@@ -76,7 +75,7 @@ public class Tweet {
     }
 
     public String getDateString() {
-        return "Registered:" + dateString();
+        return dateString();
     }
 
     private String dateString() {

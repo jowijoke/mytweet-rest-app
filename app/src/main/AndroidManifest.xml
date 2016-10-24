@@ -31,6 +31,13 @@
                 android:value=".activities.TweetListActivity" />
         </activity>
         <activity
+            android:name=".activities.settings.SettingsActivity"
+            android:label="@string/action_settings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.TweetListActivity" />
+        </activity>
+        <activity
             android:name=".activities.WelcomeActivity"
             android:label="title_activity_mytweet" />
     </application>

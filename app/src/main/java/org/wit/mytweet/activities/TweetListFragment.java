@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
+import org.wit.mytweet.activities.settings.SettingsActivity;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
@@ -59,6 +60,8 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
         listView = (ListView) v.findViewById(android.R.id.list);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
+
+
         return v;
     }
 
@@ -94,6 +97,10 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 startActivityForResult(i, 0);
                 return true;
 
+            case R.id.action_settings:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -127,7 +134,7 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_item_delete_tweet:
-                deleteResidence(actionMode);
+                deleteTweet(actionMode);
                 return true;
             default:
                 return false;
@@ -135,7 +142,7 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
 
     }
 
-    private void deleteResidence(ActionMode actionMode) {
+    private void deleteTweet(ActionMode actionMode) {
         for (int i = adapter.getCount() - 1; i >= 0; i--) {
             if (listView.isItemChecked(i)) {
                 portfolio.deleteTweet(adapter.getItem(i));
@@ -168,6 +175,9 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 convertView = inflater.inflate(R.layout.list_item_tweet, null);
             }
             Tweet tweet = getItem(position);
+
+            TextView messageTextView = (TextView) convertView.findViewById(R.id.tweet_list_item_message);
+            messageTextView.setText(tweet.message);
 
             TextView dateTextView = (TextView) convertView.findViewById(R.id.tweet_list_item_dateTextView);
             dateTextView.setText(tweet.getDateString());

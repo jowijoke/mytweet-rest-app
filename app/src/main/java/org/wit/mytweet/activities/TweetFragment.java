@@ -32,7 +32,7 @@ import static org.wit.android.helpers.IntentHelper.navigateUp;
 
 public class TweetFragment extends Fragment implements TextWatcher, View.OnClickListener {
 
-    public static final String EXTRA_TWEET_ID = "mytweet.TWEET_ID";
+    public static final String EXTRA_TWEET_ID = "TWEET_ID";
 
     private static final int REQUEST_CONTACT = 1;
 
@@ -61,6 +61,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         portfolio = app.portfolio;
         tweet = portfolio.getTweet(msgId);
 
+
     }
 
 
@@ -70,7 +71,13 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         View v = inflater.inflate(R.layout.fragment_tweet, parent, false);
 
         addListeners(v);
+
+
+        if (tweet.message != null) {
+            updateControlls(tweet);
+        }
         return v;
+
     }
 
 
@@ -89,6 +96,15 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
 
 
     }
+
+    public void updateControlls(Tweet tweet) {
+        editTweet.setText(tweet.message);
+        editTweet.setEnabled(false);
+        TweetButton.setClickable(false);
+        int totalCountdown = 140;
+        countdown.setText(Integer.toString(totalCountdown - tweet.message.length()));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -130,6 +146,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         switch (v.getId()) {
             case R.id.tweetButton:
                 if (editTweet.getText().length() > 0) {
+                    tweet.message = editTweet.getText().toString();
                     IntentHelper.startActivity(getActivity(), TweetListActivity.class);
                     portfolio.saveTweets();
                     break;
