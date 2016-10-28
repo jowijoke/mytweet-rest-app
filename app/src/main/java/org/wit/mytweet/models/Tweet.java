@@ -1,11 +1,9 @@
 package org.wit.mytweet.models;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wit.mytweet.R;
 
 import java.util.Date;
 import java.util.Random;
@@ -61,15 +59,11 @@ public class Tweet {
         return json;
     }
 
-    @SuppressLint("StringFormatInvalid")
     public String getTweetReport(Context context) {
-        String contactUser = contact;
-        if (contact == null) {
-            contactUser = context.getString(R.string.tweet_report_nobody_contact);
-        } else {
-            contactUser = context.getString(R.string.residence_report_contact, contact);
-        }
-        String report = " Date: " + dateString() + " " + contactUser;
+
+
+        String msg = message;
+        String report = msg;
         return report;
 
     }

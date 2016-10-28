@@ -165,7 +165,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
                 Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 startActivityForResult(i, REQUEST_CONTACT);
                 if (tweet.contact != null) {
-                    ContactButton.setText("Tenant: " + tweet.contact);
+                    ContactButton.setText("Contact: " + tweet.contact);
                 }
                 break;
 
