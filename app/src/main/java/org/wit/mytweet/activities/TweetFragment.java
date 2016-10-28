@@ -74,7 +74,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
 
 
         if (tweet.message != null) {
-            updateControlls(tweet);
+            updateControls(tweet);
         }
         return v;
 
@@ -97,7 +97,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
 
     }
 
-    public void updateControlls(Tweet tweet) {
+    public void updateControls(Tweet tweet) {
         editTweet.setText(tweet.message);
         editTweet.setEnabled(false);
         TweetButton.setClickable(false);
@@ -110,6 +110,10 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                if (tweet.message == null) {
+                    portfolio.deleteTweet(tweet);
+
+                }
                 navigateUp(getActivity());
                 return true;
 
