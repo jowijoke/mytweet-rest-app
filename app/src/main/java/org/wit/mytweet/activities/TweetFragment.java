@@ -170,7 +170,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
                 break;
 
             case R.id.tweet_EmailButton:
-                sendEmail(getActivity(), "emailAddress", getString(R.string.tweet_email_subject), tweet.getTweetReport(getActivity()));
+                sendEmail(getActivity(), emailAddress, getString(R.string.tweet_email_subject), tweet.getTweetReport(getActivity()));
                 break;
 
 
