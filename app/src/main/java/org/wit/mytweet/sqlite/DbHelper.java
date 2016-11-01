@@ -177,8 +177,8 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             ContentValues values = new ContentValues();
             values.put(FIRSTNAME, user.firstName);
-            values.put(LASTNAME, user.lastName;
-            values.put(EMAIL, user.email;
+            values.put(LASTNAME, user.lastName);
+            values.put(EMAIL, user.email);
             values.put(PASSWORD, user.password);
             db.update("tableUsers", values, "id" + "=?", new String[]{user.id.toString() + ""});
         } catch (Exception e) {
