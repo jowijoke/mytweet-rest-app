@@ -39,7 +39,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
     private Button ContactButton;
     private Button EmailButton;
     private Button TweetButton;
-
+    private TextView date;
     EditText editTweet;
     TextView countdown;
 

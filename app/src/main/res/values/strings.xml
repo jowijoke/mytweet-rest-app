@@ -8,6 +8,7 @@
     <string name="signupLastName">Last Name</string>
     <string name="signupEmail">Email</string>
     <string name="signupPassword">Password</string>
+    <string name="signupConfirmPassword">Confirm Password</string>
     <string name="loginTitle">Login to MyTweet</string>
     <string name="loginEmail">Email</string>
     <string name="loginPassword">Password</string>
