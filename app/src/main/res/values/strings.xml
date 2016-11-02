@@ -12,7 +12,7 @@
     <string name="loginTitle">Login to MyTweet</string>
     <string name="loginEmail">Email</string>
     <string name="loginPassword">Password</string>
-    <string name="loginSignIn">Sign in</string>
+    <string name="loginButton">Login</string>
     <string name="loginSubtitle">You must be registered to Login</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_signup">Signup</string>
