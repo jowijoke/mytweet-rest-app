@@ -72,7 +72,8 @@
         android:layout_marginTop="85dp"
         android:layout_below="@+id/tweetButton"
         android:layout_alignStart="@+id/tweet_date"
-        android:layout_alignEnd="@+id/tweet_date" />
+        android:layout_alignEnd="@+id/tweet_date"
+        android:textColor="@drawable/edit_text_selector" />
 
 
 </RelativeLayout>
