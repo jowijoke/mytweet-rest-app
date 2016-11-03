@@ -101,6 +101,12 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
 
+            case R.id.action_clear:
+                portfolio.deleteAllTweet();
+                adapter.notifyDataSetChanged();
+                return true;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

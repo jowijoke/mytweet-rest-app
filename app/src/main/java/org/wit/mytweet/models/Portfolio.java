@@ -56,5 +56,10 @@ public class Portfolio {
         saveTweets();
     }
 
+    public void deleteAllTweet() {
+        tweets.clear();
+        saveTweets();
+    }
+
 
 }
