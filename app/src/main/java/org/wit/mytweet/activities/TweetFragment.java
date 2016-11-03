@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +39,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
     private Button ContactButton;
     private Button EmailButton;
     private Button TweetButton;
-    private TextView date;
+    private TextView tDate;
     EditText editTweet;
     TextView countdown;
 
@@ -75,6 +75,8 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
 
         if (tweet.message != null) {
             updateControls(tweet);
+        } else {
+            tDate.setText(tweet.getDateString());// Display current date and time if this is a new tweet being created.
         }
         return v;
 
@@ -88,21 +90,28 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         TweetButton = (Button) v.findViewById(R.id.tweetButton);
         editTweet = (EditText) v.findViewById(R.id.editTweet);
         countdown = (TextView) v.findViewById(R.id.countdown);
+        tDate = (TextView) v.findViewById(R.id.tweet_date);
 
         editTweet.addTextChangedListener(this);
         ContactButton.setOnClickListener(this);
         EmailButton.setOnClickListener(this);
         TweetButton.setOnClickListener(this);
+        tDate.setOnClickListener(this);
 
 
     }
 
+    /*
+    Method to display tweet details if the tweet is already created & selected from the list of tweets.
+    */
     public void updateControls(Tweet tweet) {
         editTweet.setText(tweet.message);
         editTweet.setEnabled(false);
         TweetButton.setClickable(false);
         int totalCountdown = 140;
         countdown.setText(Integer.toString(totalCountdown - tweet.message.length()));
+
+
     }
 
 

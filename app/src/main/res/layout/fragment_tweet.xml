@@ -49,6 +49,18 @@
         android:layout_alignStart="@+id/contact"
         android:layout_above="@+id/contact" />
 
+    <TextView
+        android:id="@+id/countdown"
+        android:text="140"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_alignBaseline="@+id/tweetButton"
+        android:layout_alignBottom="@+id/tweetButton"
+        android:layout_alignStart="@+id/tweet_date" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,22 +69,10 @@
         android:id="@+id/editTweet"
         android:hint="@string/tweet"
         android:textAlignment="center"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="85dp"
         android:layout_below="@+id/tweetButton"
-        android:layout_alignEnd="@+id/tweetButton"
-        android:layout_alignStart="@+id/tweet_date" />
-
-    <TextView
-        android:id="@+id/countdown"
-        android:text="140"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tweetButton"
-        android:layout_alignBottom="@+id/tweetButton"
-        android:layout_alignStart="@+id/editTweet"
-        android:layout_marginStart="55dp" />
+        android:layout_alignStart="@+id/tweet_date"
+        android:layout_alignEnd="@+id/tweet_date" />
 
 
 </RelativeLayout>
