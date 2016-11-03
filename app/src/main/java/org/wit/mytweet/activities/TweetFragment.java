@@ -110,7 +110,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
         TweetButton.setClickable(false);
         int totalCountdown = 140;
         countdown.setText(Integer.toString(totalCountdown - tweet.message.length()));
-
+        tDate.setText(tweet.getDateString());
 
     }
 
