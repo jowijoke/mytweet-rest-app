@@ -1,10 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+
     tools:context="org.wit.myrent.ResidencePagerActivity">
 
     <item
         android:id="@+id/menu_item_new_tweet"
+
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/new_tweet"
         app:showAsAction="ifRoom|withText" />
@@ -14,11 +17,13 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never"
+        android:background="@color/colorPrimary"
         android:title="@string/settings" />
 
     <item
         android:id="@+id/action_clear"
         android:orderInCategory="100"
+        android:background="@color/colorPrimary"
         app:showAsAction="never"
         android:title="@string/action_clear" />
 

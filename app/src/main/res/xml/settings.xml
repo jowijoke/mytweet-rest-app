@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/background_color">
     <EditTextPreference
         android:key="username"
+        android:background="@color/background_color"
         android:summary="@string/username_summary"
         android:title="@string/username" />
 
     <EditTextPreference
         android:key="password"
+        android:background="@color/background_color"
         android:summary="@string/password_summary"
         android:title="@string/password"
         android:inputType="textPassword" />
 
     <EditTextPreference
+        android:background="@color/background_color"
         android:key="nmr_tweets"
         android:summary="@string/nmr_tweets_summary"
         android:title="@string/nmr_tweets"
@@ -19,6 +23,7 @@
 
     <EditTextPreference
         android:key="refresh_interval"
+        android:background="@color/background_color"
         android:summary="@string/set_refresh_interval_summary"
         android:title="@string/set_refresh_interval"
         android:inputType="text" />
