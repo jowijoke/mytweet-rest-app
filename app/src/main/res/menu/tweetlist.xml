@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
 
-    tools:context="org.wit.myrent.ResidencePagerActivity">
+    tools:context="org.wit.myrent.TweetPagerActivity">
 
     <item
         android:id="@+id/menu_item_new_tweet"

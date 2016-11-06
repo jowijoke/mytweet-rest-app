@@ -63,7 +63,7 @@ public class PortfolioSerializer {
             }
             // parse the JSON using JSONTokener
             JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
-            // build the array of residences from JSONObjects
+            // build the array of tweets from JSONObjects
             for (int i = 0; i < array.length(); i++) {
                 tweets.add(new Tweet(array.getJSONObject(i)));
             }
