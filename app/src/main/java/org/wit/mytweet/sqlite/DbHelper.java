@@ -19,7 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "mytweet.db";
 
     static final String USER_TABLE = "users";
-    static final String PRIMARY_KEY = "id";
+    static final String PRIMARY_KEY = "_id";
     static final String COLUMN_FIRSTNAME = "firstName";
     static final String COLUMN_LASTNAME = "lastName";
     static final String COLUMN_EMAIL = "email";
