@@ -13,9 +13,9 @@ import org.wit.mytweet.sqlite.DbHelper;
 
 public class MyTweetApp extends Application {
     public Portfolio portfolio;
-    private static final String FILENAME = "portfolio.json";
+    //private static final String FILENAME = "portfolio.json";
     static final String TAG = "MyTweetApp";
-    public DbHelper dbHelper = null;
+    //public DbHelper dbHelper = null;
     protected static MyTweetApp app;
 
 
@@ -24,8 +24,8 @@ public class MyTweetApp extends Application {
         super.onCreate();
         app = this;
         Log.d(TAG, "MyTweet app launched");
-        PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
-        portfolio = new Portfolio(serializer);
+        //PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
+        portfolio = new Portfolio(getApplicationContext());
 
 
 

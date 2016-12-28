@@ -26,7 +26,7 @@ public class Tweet {
 
     public Tweet() {
         id = unsignedLong();
-        id = new Random().nextLong();
+        //id = new Random().nextLong();
         date = new Date().getTime();
 
     }
