@@ -1,17 +1,24 @@
 package org.wit.mytweet.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
+import org.wit.mytweet.models.User;
 import org.wit.mytweet.sqlite.DbHelper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.wit.android.helpers.LogHelpers.info;
 import static org.wit.mytweet.R.id.Email;
@@ -23,7 +30,7 @@ import static org.wit.mytweet.R.id.lastName;
  * Created by User on 02/10/2016.
  */
 
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements Callback<User>, View.OnClickListener {
     private Button bsignup;
     private EditText et_firstname, et_lastname, et_email, et_password, et_cpassword;
     private String firstname, lastname, email, password, cpassword;
@@ -69,8 +76,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     public void onSignupSuccess() {
         db.addUser(firstname, lastname, email, password);
+        TextView firstName = (TextView)  findViewById(R.id.firstName);
+        TextView lastName  = (TextView)  findViewById(R.id.lastName);
+        TextView email     = (TextView)  findViewById(R.id.Email);
+        TextView password  = (TextView)  findViewById(R.id.Password);
         Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
         IntentHelper.startActivity(this, LoginActivity.class);
+
+        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+
+        MyTweetApp app = (MyTweetApp) getApplication();
+        Call<User> call = (Call<User>) app.tweetService.createUser(user);
+        call.enqueue(this);
     }
 
     public boolean validate() {
@@ -112,4 +129,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    @Override
+    public void onResponse(Call<User> call, Response<User> response) {
+
+        app.users.add(response.body());
+        startActivity(new Intent(this, WelcomeActivity.class));
+    }
+
+    @Override
+    public void onFailure(Call<User> call, Throwable t) {
+        app.tweetServiceAvailable = false;
+        Toast toast = Toast.makeText(this, "MyTweet Service Unavailable. Try again later", Toast.LENGTH_LONG);
+        toast.show();
+        startActivity (new Intent(this, WelcomeActivity.class));
+    }
 }
