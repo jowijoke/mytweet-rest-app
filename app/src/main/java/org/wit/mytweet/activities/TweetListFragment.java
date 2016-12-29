@@ -24,6 +24,7 @@ import org.wit.mytweet.activities.settings.SettingsActivity;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
+import org.wit.mytweet.sqlite.DbHelper;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
     private Portfolio portfolio;
     private TweetAdapter adapter;
     MyTweetApp app;
+
+    private DbHelper db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 return true;
 
             case R.id.action_clear:
-                portfolio.deleteAllTweet();
+                portfolio.deleteAllTweets(tweets);
                 adapter.notifyDataSetChanged();
                 return true;
 

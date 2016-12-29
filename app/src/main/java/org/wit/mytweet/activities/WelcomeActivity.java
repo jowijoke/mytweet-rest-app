@@ -5,14 +5,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.wit.mytweet.R;
+import org.wit.mytweet.main.MyTweetApp;
+import org.wit.mytweet.models.User;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.wit.android.helpers.LogHelpers.info;
 
 
-public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeActivity extends AppCompatActivity implements Callback<List<User>>, View.OnClickListener {
 
+    private MyTweetApp app;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +34,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
         login.setOnClickListener(this);
         signup.setOnClickListener(this);
+
+        app = (MyTweetApp) getApplication();
     }
 
     @Override
@@ -41,5 +53,41 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
         }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        app.currentUser = null;
+        Call<List<User>> call1 = (Call<List<User>>) app.tweetService.getAllUsers();
+        call1.enqueue(this);
+
+    }
+
+
+    @Override
+    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+        serviceAvailableMessage();
+        app.users = response.body();
+        app.tweetServiceAvailable = true;
+    }
+
+    @Override
+    public void onFailure(Call<List<User>> call, Throwable t) {
+        app.tweetServiceAvailable = false;
+        serviceUnavailableMessage();
+    }
+
+    void serviceUnavailableMessage()
+    {
+        Toast toast = Toast.makeText(this, "Tweet Service Unavailable. Try again later", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    void serviceAvailableMessage()
+    {
+        Toast toast = Toast.makeText(this, "Tweet Contacted Successfully", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
