@@ -75,7 +75,8 @@ public class SignupActivity extends AppCompatActivity implements Callback<User>,
         User user = new User(firstname, lastname, email, password);
 
         MyTweetApp app = (MyTweetApp) getApplication();
-        Call<User> call = app.tweetService.createUser(user);
+        Call<User> call = app.tweetServiceOpen.createUser(user);
+        info(this, "new user sending to API: " + user);
         call.enqueue(this);
     }
 
