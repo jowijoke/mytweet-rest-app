@@ -1,5 +1,6 @@
 package org.wit.mytweet.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ import static org.wit.android.helpers.LogHelpers.info;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static Context mContext;
+
     private Button login;
     private EditText etEmail, etPass;
     private String email, password;
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         app = MyTweetApp.getApp();
+        mContext = this;
 
         login = (Button) findViewById(R.id.loginButton);
         etEmail = (EditText) findViewById(R.id.loginEmail);
@@ -68,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!validate()) {
             Toast.makeText(this, "Signup has failed", Toast.LENGTH_SHORT).show();
         } else {
-            onLoginSuccess();
+            checkApi();
         }
     }
 
@@ -92,14 +96,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void onLoginSuccess() {
+    public void checkApi() {
         MyTweetApp app = (MyTweetApp) getApplication();
-        if(!app.validUser(email, password)){
-            Toast.makeText(getApplicationContext(), "Wrong email/password", Toast.LENGTH_SHORT).show();
+        app.validUser(email, password);
+    }
 
-        }else {
-            IntentHelper.startActivity(this, TweetListActivity.class);
+    public static void onLoginSuccess() {
 
-        }
+            Intent tweetList = new Intent (mContext, TweetListActivity.class);
+        mContext.startActivity(tweetList);
     }
 }

@@ -14,6 +14,7 @@ import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Token;
 import org.wit.mytweet.models.Tweet;
 import org.wit.mytweet.models.User;
+import org.wit.mytweet.activities.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,17 +78,21 @@ public class MyTweetApp extends Application implements Callback<Token> {
 
     @Override
     public void onResponse(Call<Token> call, Response<Token> response) {
-        Token auth = response.body();
-        currentUser = auth.user;
-        tweetService =  RetrofitServiceFactory.createService(TweetService.class, auth.token);
-        Log.v("MyTweet", "Authenticated ");
-
+        if(response.isSuccessful()){
+            Token auth = response.body();
+            currentUser = auth.user;
+            tweetService =  RetrofitServiceFactory.createService(TweetService.class, auth.token);
+            Log.v("MyTweet", "Authenticated ");
+            LoginActivity.onLoginSuccess();
+        }else {
+            Toast toast = Toast.makeText(this, "Unable to authenticate with Tweet Service", Toast.LENGTH_SHORT);
+            toast.show();
+            Log.v("MyTweet", "Failed to Authenticated!");
+        }
     }
 
     @Override
     public void onFailure(Call<Token> call, Throwable t) {
-        Toast toast = Toast.makeText(this, "Unable to authenticate with Donation Service", Toast.LENGTH_SHORT);
-        toast.show();
-        Log.v("MyTweet", "Failed to Authenticated!");
+
     }
 }
