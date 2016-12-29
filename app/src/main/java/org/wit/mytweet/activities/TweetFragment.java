@@ -161,7 +161,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
                 if (editTweet.getText().length() > 0) {
                     tweet.message = editTweet.getText().toString();
                     IntentHelper.startActivity(getActivity(), TweetListActivity.class);
-                    portfolio.addTweet(tweet);
+                    portfolio.updateTweet(tweet);
                     break;
                 } else {
 
