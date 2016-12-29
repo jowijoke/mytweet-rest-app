@@ -4,8 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import org.wit.mytweet.models.Portfolio;
-import org.wit.mytweet.models.PortfolioSerializer;
-import org.wit.mytweet.sqlite.DbHelper;
 
 /**
  * Created by User on 02/10/2016.

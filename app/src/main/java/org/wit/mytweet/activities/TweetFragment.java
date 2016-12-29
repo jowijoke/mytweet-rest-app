@@ -134,7 +134,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
     @Override
     public void onPause() {
         super.onPause();
-        portfolio.saveTweets();
+        portfolio.updateTweet(tweet);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class TweetFragment extends Fragment implements TextWatcher, View.OnClick
                 if (editTweet.getText().length() > 0) {
                     tweet.message = editTweet.getText().toString();
                     IntentHelper.startActivity(getActivity(), TweetListActivity.class);
-                    portfolio.saveTweets();
+                    portfolio.addTweet(tweet);
                     break;
                 } else {
 

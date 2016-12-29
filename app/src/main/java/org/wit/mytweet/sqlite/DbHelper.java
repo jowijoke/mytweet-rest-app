@@ -104,6 +104,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return tweet;
     }
 
+
     public void deleteTweet(Tweet tweet) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
@@ -118,7 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Query database and select entire tableResidences.
+     * Query database and select entire tableTweets.
      *
      * @return A list of Residence object records
      */

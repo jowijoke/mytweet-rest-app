@@ -26,7 +26,7 @@ public class Tweet {
 
     public Tweet() {
         id = unsignedLong();
-        //id = new Random().nextLong();
+        id = new Random().nextLong();
         date = new Date().getTime();
 
     }
@@ -42,21 +42,6 @@ public class Tweet {
             rndVal = new Random().nextLong();
         } while (rndVal <= 0);
         return rndVal;
-    }
-
-    public Tweet(JSONObject json) throws JSONException {
-        id = json.getLong(JSON_ID);
-        date = json.getLong(JSON_DATE);
-        message = json.getString(JSON_MESSAGE);
-    }
-
-    public JSONObject toJSON() throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put(JSON_ID, Long.toString(id));
-        json.put(JSON_DATE, date);
-        json.put(JSON_MESSAGE, message);
-        json.put(JSON_CONTACT, contact);
-        return json;
     }
 
     public String getTweetReport(Context context) {
