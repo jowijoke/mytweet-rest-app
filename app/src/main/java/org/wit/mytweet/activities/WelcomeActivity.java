@@ -60,7 +60,7 @@ public class WelcomeActivity extends AppCompatActivity implements Callback<List<
     {
         super.onResume();
         app.currentUser = null;
-        Call<List<User>> call1 = (Call<List<User>>) app.tweetService.getAllUsers();
+        Call<List<User>> call1 = (Call<List<User>>) app.tweetServiceOpen.getAllUsers();
         call1.enqueue(this);
 
     }
