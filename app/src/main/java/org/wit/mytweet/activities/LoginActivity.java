@@ -3,6 +3,7 @@ package org.wit.mytweet.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -10,19 +11,26 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.wit.android.helpers.IntentHelper;
+import org.wit.android.helpers.LogHelpers;
 import org.wit.mytweet.R;
 import org.wit.mytweet.main.MyTweetApp;
+import org.wit.mytweet.main.RetrofitServiceFactory;
+import org.wit.mytweet.main.TweetService;
+import org.wit.mytweet.main.TweetServiceOpen;
+import org.wit.mytweet.models.Token;
 import org.wit.mytweet.models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static org.wit.android.helpers.LogHelpers.info;
+
 /**
  * Created by User on 02/10/2016.
  */
 
-public class LoginActivity extends AppCompatActivity implements Callback<User>,View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button login;
     private EditText etEmail, etPass;
@@ -79,32 +87,19 @@ public class LoginActivity extends AppCompatActivity implements Callback<User>,V
 
 
     public void initialise() {
-        email = etEmail.getText().toString();
-        password = etPass.getText().toString();
+        email = etEmail.getText().toString().trim();
+        password = etPass.getText().toString().trim();
 
     }
 
-    public void onLoginSuccess()
-    {
+    public void onLoginSuccess() {
         MyTweetApp app = (MyTweetApp) getApplication();
-        User user = new User(null, null, email, password);
-        Call<User> call = app.tweetService.authUser(user);
-        call.enqueue(this);
-    }
+        if(!app.validUser(email, password)){
+            Toast.makeText(getApplicationContext(), "Wrong email/password", Toast.LENGTH_SHORT).show();
 
+        }else {
+            IntentHelper.startActivity(this, TweetListActivity.class);
 
-    @Override
-    public void onResponse(Call<User> call, Response<User> response) {
-        Toast.makeText(this, "User found in API", Toast.LENGTH_SHORT).show();
-        app.users.add(response.body());
-        IntentHelper.startActivity(this, TweetListActivity.class);
-    }
-
-    @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        app.tweetServiceAvailable = false;
-        Toast toast = Toast.makeText(this, "MyTweet Service Unavailable. Try again later", Toast.LENGTH_LONG);
-        toast.show();
-        startActivity (new Intent(this, WelcomeActivity.class));
+        }
     }
 }
