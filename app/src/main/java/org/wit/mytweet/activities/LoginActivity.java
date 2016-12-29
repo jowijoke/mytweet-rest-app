@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
+import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.sqlite.DbHelper;
 
 /**
@@ -21,7 +22,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button login;
     private EditText etEmail, etPass;
     private String email, pass;
-    private DbHelper db;
 
 
     @Override
@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        db = new DbHelper(this);
         login = (Button) findViewById(R.id.loginButton);
         etEmail = (EditText) findViewById(R.id.loginEmail);
         etPass = (EditText) findViewById(R.id.loginPassword);
@@ -77,8 +76,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void onLoginSuccess() {
-        if (db.getUser(email, pass)) {
+    public void onLoginSuccess()
+    {
+        MyTweetApp app = (MyTweetApp) getApplication();
+
+        if (app.validUser(email, pass)) {
 
             IntentHelper.startActivity(this, TweetListActivity.class);
 
