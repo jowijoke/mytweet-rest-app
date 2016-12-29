@@ -66,6 +66,7 @@ public class MyTweetApp extends Application {
 
     public boolean validUser (String email, String password)
     {
+
         for (User user : users)
         {
             if (user.email.equals(email) && user.password.equals(password))

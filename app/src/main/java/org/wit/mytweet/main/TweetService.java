@@ -22,8 +22,11 @@ public interface  TweetService {
     @GET("/api/users/{id}")
     Call<User> getUser(@Path("id") String id);
 
+    @POST("/api/users/authenticate")
+    Call<User> authUser(@Body User user);
+
     @POST("/api/users")
-    Call<User> createUser(@Body User User);
+    Call<User> createUser(@Body User user);
 
     @GET("/api/tweets")
     Call<List<Tweet>> getAllTweets();

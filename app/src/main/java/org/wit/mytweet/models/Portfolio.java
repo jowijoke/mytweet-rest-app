@@ -82,6 +82,11 @@ public class Portfolio {
 
     }
 
+    public void deleteAllTweets(List<Tweet> tweets) {
+        dbHelper.deleteTweets();
+        this.tweets.clear();
+    }
+
     /**
      * Clear local and sqlite tweets and refresh with incoming list.
      * @param tweets List tweet objects

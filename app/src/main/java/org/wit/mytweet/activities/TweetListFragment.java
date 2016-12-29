@@ -48,8 +48,6 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.app_name);
 
-        db = new DbHelper(getActivity());
-
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;
         tweets = portfolio.tweets;
@@ -107,7 +105,7 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 return true;
 
             case R.id.action_clear:
-                db.deleteTweets();
+                portfolio.deleteAllTweets(tweets);
                 adapter.notifyDataSetChanged();
                 return true;
 

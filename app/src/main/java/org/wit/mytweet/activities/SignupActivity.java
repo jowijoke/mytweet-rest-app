@@ -73,8 +73,6 @@ public class SignupActivity extends AppCompatActivity implements Callback<User>,
 
     public void onSignupSuccess() {
         User user = new User(firstname, lastname, email, password);
-        Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
-
 
         MyTweetApp app = (MyTweetApp) getApplication();
         Call<User> call = app.tweetService.createUser(user);
@@ -122,6 +120,7 @@ public class SignupActivity extends AppCompatActivity implements Callback<User>,
 
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
+        Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
         app.users.add(response.body());
         IntentHelper.startActivity(this, LoginActivity.class);
     }
