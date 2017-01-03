@@ -13,7 +13,7 @@ import java.util.Random;
  */
 
 public class Tweet {
-    public long id;
+    public Long id;
     public String message;
     public Long date;
     public String contact;
@@ -26,7 +26,7 @@ public class Tweet {
 
     public Tweet() {
         id = unsignedLong();
-        id = new Random().nextLong();
+       // id = new Random().nextLong();
         date = new Date().getTime();
 
     }
