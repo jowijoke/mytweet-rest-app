@@ -7,6 +7,7 @@ import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,10 @@ import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static org.wit.android.helpers.ContactHelper.sendEmail;
 import static org.wit.android.helpers.IntentHelper.navigateUp;
 
@@ -30,7 +35,7 @@ import static org.wit.android.helpers.IntentHelper.navigateUp;
  * Created by User on 17/10/2016.
  */
 
-public class TweetFragment extends Fragment implements  TextWatcher, View.OnClickListener {
+public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatcher, View.OnClickListener {
 
     public static final String EXTRA_TWEET_ID = "TWEET_ID";
 
@@ -158,10 +163,18 @@ public class TweetFragment extends Fragment implements  TextWatcher, View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tweetButton:
-                if (editTweet.getText().length() > 0) {
+
+                    tweet = new Tweet();
                     tweet.message = editTweet.getText().toString();
+                    Log.v("tweet Message ", tweet.message);
+                    Call<Tweet> call = (Call<Tweet>) app.tweetService.makeTweet(MyTweetApp.currentUser._id, tweet);
+                    call.enqueue(this);
+                if (editTweet.getText().length() > 0) {
                     IntentHelper.startActivity(getActivity(), TweetListActivity.class);
-                    portfolio.updateTweet(tweet);
+                  //  portfolio.updateTweet(tweet);
+
+                    Toast toast = Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT);
+                    toast.show();
                     break;
                 } else {
 
@@ -202,5 +215,18 @@ public class TweetFragment extends Fragment implements  TextWatcher, View.OnClic
         countdown.setText(String.valueOf(140 - s.length()));
 
 
+    }
+
+    @Override
+    public void onResponse(Call<Tweet> call, Response<Tweet> response) {
+        Toast toast = Toast.makeText(getActivity(), "Tweet Accepted", Toast.LENGTH_SHORT);
+        toast.show();
+        app.tweets.add(response.body());
+    }
+
+    @Override
+    public void onFailure(Call<Tweet> call, Throwable t) {
+        Toast toast = Toast.makeText(getActivity(), "Error creating tweet", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
