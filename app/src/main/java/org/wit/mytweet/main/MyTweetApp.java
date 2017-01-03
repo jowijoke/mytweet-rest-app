@@ -17,6 +17,7 @@ import org.wit.mytweet.models.User;
 import org.wit.mytweet.activities.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,6 +57,17 @@ public class MyTweetApp extends Application implements Callback<Token> {
         Log.d(TAG, "MyTweet app launched");
         //PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
         portfolio = new Portfolio(getApplicationContext());
+
+        Gson gson = new GsonBuilder()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(service_url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        tweetService = retrofit.create(TweetService.class);
+
     }
 
     public static MyTweetApp getApp() {

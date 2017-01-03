@@ -30,7 +30,7 @@ import static org.wit.android.helpers.IntentHelper.navigateUp;
  * Created by User on 17/10/2016.
  */
 
-public class TweetFragment extends Fragment implements TextWatcher, View.OnClickListener {
+public class TweetFragment extends Fragment implements  TextWatcher, View.OnClickListener {
 
     public static final String EXTRA_TWEET_ID = "TWEET_ID";
 

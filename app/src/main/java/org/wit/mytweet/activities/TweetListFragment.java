@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.wit.android.helpers.IntentHelper;
 import org.wit.mytweet.R;
@@ -24,15 +26,23 @@ import org.wit.mytweet.activities.settings.SettingsActivity;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
+import org.wit.mytweet.models.User;
 import org.wit.mytweet.sqlite.DbHelper;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static org.wit.android.helpers.LogHelpers.info;
 
 /**
  * Created by User on 17/10/2016.
  */
 
-public class TweetListFragment extends ListFragment implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
+public class TweetListFragment extends ListFragment implements Callback<List<Tweet>>, AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
 
     private ListView listView;
     private ArrayList<Tweet> tweets;
@@ -54,6 +64,9 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
 
         adapter = new TweetAdapter(getActivity(), tweets);
         setListAdapter(adapter);
+
+        Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.getAllTweets();
+        call.enqueue(this);
     }
 
     @Override
@@ -100,6 +113,10 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
                 startActivityForResult(i, 0);
                 return true;
 
+            case R.id.action_refresh:
+                retrieveResidences();
+                return true;
+
             case R.id.action_settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
@@ -125,6 +142,26 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
     public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
 
     }
+
+    public void retrieveResidences() {
+        Toast.makeText(getActivity(), "Retrieving Tweet list", Toast.LENGTH_SHORT).show();
+        Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.getAllTweets();
+        call.enqueue(this);
+    }
+
+    @Override
+    public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
+        adapter.tweets = response.body();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(Call<List<Tweet>> call, Throwable t) {
+        Toast toast = Toast.makeText(getActivity(), "Error retrieving tweets", Toast.LENGTH_SHORT);
+        toast.show();
+        info(this, "Failed: " + t );
+    }
+
 
     /* ************ MultiChoiceModeListener methods (begin) *********** */
     @Override
@@ -166,14 +203,17 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
 
     }
 
+
     /* ************ MultiChoiceModeListener methods (end) *********** */
 
     class TweetAdapter extends ArrayAdapter<Tweet> {
         private Context context;
+        public List<Tweet> tweets;
 
         public TweetAdapter(Context context, ArrayList<Tweet> tweets) {
             super(context, 0, tweets);
             this.context = context;
+            this.tweets = tweets;
         }
 
         @SuppressLint("InflateParams")
@@ -183,7 +223,7 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.list_item_tweet, null);
             }
-            Tweet tweet = getItem(position);
+            Tweet tweet = tweets.get(position);
 
             TextView messageTextView = (TextView) convertView.findViewById(R.id.tweet_list_item_message);
             messageTextView.setText(tweet.message);
@@ -192,6 +232,10 @@ public class TweetListFragment extends ListFragment implements AdapterView.OnIte
             dateTextView.setText(tweet.getDateString());
 
             return convertView;
+        }
+        @Override
+        public int getCount() {
+            return tweets.size();
         }
     }
 }
