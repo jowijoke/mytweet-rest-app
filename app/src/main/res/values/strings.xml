@@ -17,6 +17,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_signup">Signup</string>
     <string name="title_activity_mytweet">MyTweet</string>
+    <string name="refresh">Refresh Residence List</string>
     <string name="signupRegister">Register</string>
     <string name="tweetButton">Tweet</string>
     <string name="tweet">Whats on your mind?</string>
