@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +25,6 @@ import org.wit.mytweet.activities.settings.SettingsActivity;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
-import org.wit.mytweet.models.User;
 import org.wit.mytweet.sqlite.DbHelper;
 
 import java.util.ArrayList;
@@ -65,8 +63,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
         adapter = new TweetAdapter(getActivity(), tweets);
         setListAdapter(adapter);
 
-        Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.getAllTweets();
-        call.enqueue(this);
+        retrieveTweets();
     }
 
     @Override
@@ -114,7 +111,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
                 return true;
 
             case R.id.action_refresh:
-                retrieveResidences();
+                retrieveTweets();
                 return true;
 
             case R.id.action_settings:
@@ -143,7 +140,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
 
     }
 
-    public void retrieveResidences() {
+    public void retrieveTweets() {
         Toast.makeText(getActivity(), "Retrieving Tweet list", Toast.LENGTH_SHORT).show();
         Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.getAllTweets();
         call.enqueue(this);

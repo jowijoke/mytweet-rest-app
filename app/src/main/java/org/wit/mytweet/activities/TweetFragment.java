@@ -171,7 +171,7 @@ public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatch
                     call.enqueue(this);
                 if (editTweet.getText().length() > 0) {
                     IntentHelper.startActivity(getActivity(), TweetListActivity.class);
-                  //  portfolio.updateTweet(tweet);
+                    portfolio.updateTweet(tweet);
 
                     Toast toast = Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT);
                     toast.show();
