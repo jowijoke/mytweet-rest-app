@@ -60,7 +60,7 @@ public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatch
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        Long msgId = (Long) getArguments().getSerializable(EXTRA_TWEET_ID);
+        String msgId = (String) getArguments().getSerializable(EXTRA_TWEET_ID);
 
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;

@@ -54,11 +54,11 @@ public class Portfolio {
      * @param id The Long id identifier of the tweet sought.
      * @return The specified tweet if it exists.
      */
-    public Tweet getTweet(Long id) {
+    public Tweet getTweet(String id) {
         Log.i(this.getClass().getSimpleName(), "Long id id: " + id);
 
         for (Tweet t : tweets) {
-            if (id.equals(t.id)) {
+            if (id.equals(t._id)) {
                 return t;
             }
         }
@@ -113,7 +113,7 @@ public class Portfolio {
     private void updateLocalTweets(Tweet tweet) {
         for (int i = 0; i < tweets.size(); i += 1) {
             Tweet t = tweets.get(i);
-            if (t.id==(tweet.id)) {
+            if (t._id.equals(tweet._id)) {
                 tweets.remove(i);
                 tweets.add(tweet);
                 return;

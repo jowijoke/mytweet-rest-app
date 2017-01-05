@@ -82,7 +82,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
     public void onListItemClick(ListView l, View v, int position, long id) {
         Tweet msg = ((TweetAdapter) getListAdapter()).getItem(position);
         Intent i = new Intent(getActivity(), TweetPagerActivity.class);
-        i.putExtra(TweetFragment.EXTRA_TWEET_ID, msg.id);
+        i.putExtra(TweetFragment.EXTRA_TWEET_ID, msg._id);
         startActivityForResult(i, 0);
     }
 
@@ -106,7 +106,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
                 portfolio.addTweet(tweet);
 
                 Intent i = new Intent(getActivity(), TweetPagerActivity.class);
-                i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet.id);
+                i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet._id);
                 startActivityForResult(i, 0);
                 return true;
 
@@ -132,7 +132,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Tweet tweet = adapter.getItem(position);
-        IntentHelper.startActivityWithData(getActivity(), TweetPagerActivity.class, "TWEET_ID", tweet.id);
+        IntentHelper.startActivityWithData(getActivity(), TweetPagerActivity.class, "TWEET_ID", tweet._id);
     }
 
     @Override
@@ -150,13 +150,14 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
     public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
         adapter.tweets = response.body();
         adapter.notifyDataSetChanged();
+        portfolio.refreshTweets(adapter.tweets);
     }
 
     @Override
     public void onFailure(Call<List<Tweet>> call, Throwable t) {
         Toast toast = Toast.makeText(getActivity(), "Error retrieving tweets", Toast.LENGTH_SHORT);
         toast.show();
-        info(this, "Failed: " + t );
+        info(this, "Failed: " + t);
     }
 
 
@@ -210,7 +211,8 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
         public TweetAdapter(Context context, ArrayList<Tweet> tweets) {
             super(context, 0, tweets);
             this.context = context;
-            this.tweets = tweets;
+            this.tweets = tweets; //declare and intialise field
+
         }
 
         @SuppressLint("InflateParams")

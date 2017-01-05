@@ -57,7 +57,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void addTweet(Tweet tweet) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(PRIMARY_KEY, tweet.id);
+        values.put(PRIMARY_KEY, tweet._id);
         values.put(CONTACT, tweet.contact);
         values.put(DATE, tweet.date);
         values.put(MESSAGE, tweet.message);
@@ -92,7 +92,7 @@ public class DbHelper extends SQLiteOpenHelper {
             if (cursor.getCount() > 0) {
                 int columnIndex = 0;
                 cursor.moveToFirst();
-                tweet.id = cursor.getLong(columnIndex++);
+                tweet._id = String.valueOf(cursor.getLong(columnIndex++));
                 tweet.date = Long.parseLong(cursor.getString(columnIndex++));
                 tweet.message = cursor.getString(columnIndex++);
                 tweet.contact = cursor.getString(columnIndex++);
@@ -108,7 +108,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void deleteTweet(Tweet tweet) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
-            db.delete("tableTweets", "id" + "=?", new String[]{tweet.id + ""});
+            db.delete("tableTweets", "id" + "=?", new String[]{tweet._id + ""});
         }
         catch (Exception e) {
             Log.d(TAG, "delete residence failure: " + e.getMessage());
@@ -132,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
             int columnIndex = 0;
             do {
                 Tweet tweet = new Tweet();
-                tweet.id = cursor.getLong(columnIndex++);
+                tweet._id = String.valueOf(cursor.getLong(columnIndex++));
                 tweet.date = Long.parseLong(cursor.getString(columnIndex++));
                 tweet.message = cursor.getString(columnIndex++);
                 tweet.contact = cursor.getString(columnIndex++);
@@ -180,11 +180,11 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
-            values.put(PRIMARY_KEY, tweet.id);
+            values.put(PRIMARY_KEY, tweet._id);
             values.put(CONTACT, tweet.contact);
             values.put(DATE, tweet.date);
             values.put(MESSAGE, tweet.message);
-            db.update("tableTweets", values, "id" + "=?", new String[]{tweet.id + ""});
+            db.update("tableTweets", values, "id" + "=?", new String[]{tweet._id + ""});
         }
         catch (Exception e) {
             Log.d(TAG, "update tweets failure: " + e.getMessage());

@@ -8,24 +8,20 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.Random;
 
+import static android.R.attr.id;
+
 /**
  * Created by User on 03/10/2016.
  */
 
 public class Tweet {
-    public Long id;
+    public String _id;
     public String message;
     public Long date;
     public String contact;
 
-    private static final String JSON_ID = "id";
-    private static final String JSON_CONTACT = "contact";
-    private static final String JSON_MESSAGE = "message";
-    private static final String JSON_DATE = "date";
-
-
     public Tweet() {
-        id = unsignedLong();
+        //id = Integer.parseInt(String.valueOf(unsignedLong()));
        // id = new Random().nextLong();
         date = new Date().getTime();
 
