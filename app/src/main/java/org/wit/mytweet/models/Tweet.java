@@ -21,7 +21,7 @@ public class Tweet {
     public String contact;
 
     public Tweet() {
-        //id = Integer.parseInt(String.valueOf(unsignedLong()));
+       // _id = String.valueOf(unsignedLong());
        // id = new Random().nextLong();
         date = new Date().getTime();
 

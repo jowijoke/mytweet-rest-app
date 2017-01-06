@@ -40,7 +40,7 @@ import static org.wit.android.helpers.LogHelpers.info;
  * Created by User on 17/10/2016.
  */
 
-public class TweetListFragment extends ListFragment implements Callback<List<Tweet>>, AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
+public class TweetListFragment extends ListFragment implements Callback<List<Tweet>>, AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener{
 
     private ListView listView;
     private ArrayList<Tweet> tweets;
@@ -103,11 +103,8 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
         switch (item.getItemId()) {
             case R.id.menu_item_new_tweet:
                 Tweet tweet = new Tweet();
-                portfolio.addTweet(tweet);
 
-                Intent i = new Intent(getActivity(), TweetPagerActivity.class);
-                i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet._id);
-                startActivityForResult(i, 0);
+                createTweet(tweet);
                 return true;
 
             case R.id.action_refresh:
@@ -127,6 +124,35 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void createTweet(Tweet tweet) {
+        Call<Tweet> call = app.tweetService.makeTweet(MyTweetApp.currentUser._id, tweet);
+        call.enqueue(new Callback<Tweet>() {
+            @Override
+            public void onResponse(Call<Tweet> call, Response<Tweet> response) {
+                Tweet tweet = response.body();
+                if (tweet != null) {
+                    Toast.makeText(getActivity(), "Tweet created successfully", Toast.LENGTH_SHORT).show();
+
+                    portfolio.addTweet(tweet);
+                    Intent i = new Intent(getActivity(), TweetPagerActivity.class);
+                    i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet._id);
+                    startActivityForResult(i, 0);
+
+                }
+                else {
+                    Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Tweet> call, Throwable t) {
+                Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

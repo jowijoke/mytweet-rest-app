@@ -8,6 +8,7 @@ import org.wit.mytweet.sqlite.DbHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.id;
 import static org.wit.android.helpers.LogHelpers.info;
 
 /**
@@ -51,14 +52,14 @@ public class Portfolio {
     /**
      * Obtain specified tweet from local list and return.
      *
-     * @param id The Long id identifier of the tweet sought.
+     * @param _id The Long id identifier of the tweet sought.
      * @return The specified tweet if it exists.
      */
-    public Tweet getTweet(String id) {
+    public Tweet getTweet(String _id) {
         Log.i(this.getClass().getSimpleName(), "Long id id: " + id);
 
         for (Tweet t : tweets) {
-            if (id.equals(t._id)) {
+            if (_id.equals(t._id)) {
                 return t;
             }
         }
