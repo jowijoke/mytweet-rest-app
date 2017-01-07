@@ -25,4 +25,7 @@ public interface  TweetService {
 
     @POST("/api/tweets/change")
     Call<Tweet> changeTweet(@Body Tweet tweet);
+
+    @POST("/api/tweets/delete")
+    Call<Tweet> deleteTweet(@Body Tweet tweet);
 }

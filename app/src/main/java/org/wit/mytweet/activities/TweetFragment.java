@@ -127,9 +127,26 @@ public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatch
             case android.R.id.home:
                 if (tweet.message == null) {
                     portfolio.deleteTweet(tweet);
+                    Call<Tweet> call = app.tweetService.deleteTweet(tweet);
+                    call.enqueue(new Callback<Tweet>() {
+                        @Override
+                        public void onResponse(Call<Tweet> call, Response<Tweet> response) {
+                            if(response.isSuccessful()) {
+                                navigateUp(getActivity());
+                            }
+                            else {
+                                Toast.makeText(getActivity(), "can't return due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<Tweet> call, Throwable t) {
+                            Toast.makeText(getActivity(), "unable to return due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }
-                navigateUp(getActivity());
                 return true;
 
             default:
