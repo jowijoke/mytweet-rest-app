@@ -87,7 +87,7 @@ public class WelcomeActivity extends AppCompatActivity implements Callback<List<
 
     void serviceAvailableMessage()
     {
-        Toast toast = Toast.makeText(this, "Tweet Contacted Successfully", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "MyTweet Server Contacted Successfully", Toast.LENGTH_LONG);
         toast.show();
     }
 }

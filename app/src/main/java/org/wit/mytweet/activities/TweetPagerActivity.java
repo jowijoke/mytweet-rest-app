@@ -50,9 +50,9 @@ public class TweetPagerActivity extends AppCompatActivity implements ViewPager.O
     * Ensure selected Tweet is shown in details view
     */
     private void setCurrentItem() {
-        Long tweetId = (Long) getIntent().getSerializableExtra(TweetFragment.EXTRA_TWEET_ID);
+        String tweetId = (String) getIntent().getSerializableExtra(TweetFragment.EXTRA_TWEET_ID);
         for (int i = 0; i < tweets.size(); i++) {
-            if (tweets.get(i).id == (tweetId)) {
+            if (tweets.get(i)._id.equals(tweetId)) {
                 viewPager.setCurrentItem(i);
                 break;
             }
@@ -94,7 +94,7 @@ public class TweetPagerActivity extends AppCompatActivity implements ViewPager.O
         public Fragment getItem(int pos) {
             Tweet tweet = tweets.get(pos);
             Bundle args = new Bundle();
-            args.putSerializable(TweetFragment.EXTRA_TWEET_ID, tweet.id);
+            args.putSerializable(TweetFragment.EXTRA_TWEET_ID, tweet._id);
             TweetFragment fragment = new TweetFragment();
             fragment.setArguments(args);
             return fragment;
