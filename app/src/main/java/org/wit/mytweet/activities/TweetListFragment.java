@@ -168,7 +168,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
 
     public void retrieveTweets() {
         Toast.makeText(getActivity(), "Retrieving Tweet list", Toast.LENGTH_SHORT).show();
-        Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.getAllTweets();
+        Call<List<Tweet>> call = (Call<List<Tweet>>) app.tweetService.userTweets(MyTweetApp.currentUser._id);
         call.enqueue(this);
     }
 
@@ -215,11 +215,31 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
     private void deleteTweet(ActionMode actionMode) {
         for (int i = adapter.getCount() - 1; i >= 0; i--) {
             if (listView.isItemChecked(i)) {
+                Call<Tweet> call = app.tweetService.deleteTweet(adapter.getItem(i));
+                call.enqueue(new Callback<Tweet>() {
+                    @Override
+                    public void onResponse(Call<Tweet> call, Response<Tweet> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getActivity(), "Tweet deleted", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+                            Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Tweet> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 portfolio.deleteTweet(adapter.getItem(i));
             }
         }
         actionMode.finish();
         adapter.notifyDataSetChanged();
+        retrieveTweets();
     }
 
     @Override

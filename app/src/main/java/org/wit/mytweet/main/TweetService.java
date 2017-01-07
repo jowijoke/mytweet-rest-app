@@ -20,6 +20,9 @@ public interface  TweetService {
     @GET("/api/tweets")
     Call<List<Tweet>> getAllTweets();
 
+    @GET("/api/users/{id}/tweets")
+    Call<List<Tweet>> userTweets(@Path("id") String id);
+
     @POST("/api/users/{id}/tweets")
     Call<Tweet> makeTweet(@Path("id") String id, @Body Tweet tweet);
 
