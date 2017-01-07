@@ -22,4 +22,7 @@ public interface  TweetService {
 
     @POST("/api/users/{id}/tweets")
     Call<Tweet> makeTweet(@Path("id") String id, @Body Tweet tweet);
+
+    @POST("/api/tweets/change")
+    Call<Tweet> changeTweet(@Body Tweet tweet);
 }

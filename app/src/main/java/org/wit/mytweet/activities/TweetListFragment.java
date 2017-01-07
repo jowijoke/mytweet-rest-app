@@ -133,7 +133,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
             public void onResponse(Call<Tweet> call, Response<Tweet> response) {
                 Tweet tweet = response.body();
                 if (tweet != null) {
-                    Toast.makeText(getActivity(), "Tweet created successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Creating new Tweet", Toast.LENGTH_SHORT).show();
 
                     portfolio.addTweet(tweet);
                     Intent i = new Intent(getActivity(), TweetPagerActivity.class);

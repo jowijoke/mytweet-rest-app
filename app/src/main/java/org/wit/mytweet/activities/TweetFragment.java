@@ -165,11 +165,10 @@ public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatch
         switch (v.getId()) {
             case R.id.tweetButton:
                 if (editTweet.getText().length() > 0) {
-                    tweet = new Tweet();
                     tweet.message = editTweet.getText().toString();
                     portfolio.updateTweet(tweet);
                     Log.v("tweet Message ", tweet.message);
-                    Call<Tweet> call = (Call<Tweet>) app.tweetService.makeTweet(MyTweetApp.currentUser._id, tweet);
+                    Call<Tweet> call = (Call<Tweet>) app.tweetService.changeTweet(tweet);
                     call.enqueue(this);
 
                     Toast toast = Toast.makeText(getActivity(), "Sending Tweet...", Toast.LENGTH_SHORT);
