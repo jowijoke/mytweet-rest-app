@@ -39,7 +39,7 @@ public class MyTweetApp extends Application implements Callback<Token> {
 
     public boolean tweetServiceAvailable = false;
     public Portfolio portfolio;
-    public String service_url = "http://10.0.2.2:4000";   // Standard Emulator IP Address
+    public String service_url = "http://35.161.158.150:4000";   // Standard Emulator IP Address
 
     public static User currentUser;
     public List<Tweet> tweets = new ArrayList<Tweet>();
