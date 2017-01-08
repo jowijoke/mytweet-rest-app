@@ -22,9 +22,16 @@ By Default this app is designed to communicate with an API connected via localho
 
 2) mobile:  consisted of logging into an existing user from localhost API.
 
-3) security: working on sanitisation and password salting and hashing as well as creating JWT tokens.
+3) JWT: Sending callbacks to authenticate a user while retrieving a JWT token.
 
-4) aws: Configured website to used in AWS by connecting to mLab.
+4) tweet_fresh: create callabcks to retrieve the user's tweets
+
+5) social: Attempted to show users followers and recommendations to follow new users 
+
+5) heroku: Configured website to be used in heroku by connecting to mLab.
+
+6) aws: Configured website to be used in AWS by connecting to mLab.
+
 
 
 ###Users already on the database
