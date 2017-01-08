@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitServiceFactory {
-    public static final String API_BASE_URL = "http://10.0.2.2:4000";
+    public static final String API_BASE_URL = "https://wit-mytweet.herokuapp.com";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

@@ -122,6 +122,10 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
                 adapter.notifyDataSetChanged();
                 return true;
 
+            case R.id.action_logout:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);
