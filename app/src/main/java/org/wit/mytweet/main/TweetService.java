@@ -24,6 +24,13 @@ public interface  TweetService {
     @GET("/api/users/{id}/tweets")
     Call<List<Tweet>> userTweets(@Path("id") String id);
 
+    @GET("/api/users/{id}/following")
+    Call<List<User>> following(@Path("id") String id);
+
+    @GET("/api/users/{id}/requestFollowing")
+    Call<List<User>> requesting(@Path("id") String id);
+
+
     @POST("/api/users/{id}/tweets")
     Call<Tweet> makeTweet(@Path("id") String id, @Body Tweet tweet);
 

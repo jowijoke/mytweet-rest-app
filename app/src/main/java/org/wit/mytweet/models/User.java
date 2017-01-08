@@ -10,6 +10,7 @@ public class User {
     public String lastName;
     public String email;
     public String password;
+    public String followers;
 
     public User(String firstName, String lastName, String email, String password)
     {
@@ -17,5 +18,6 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.followers = followers;
     }
 }

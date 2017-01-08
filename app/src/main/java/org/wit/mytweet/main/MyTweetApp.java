@@ -44,6 +44,7 @@ public class MyTweetApp extends Application implements Callback<Token> {
     public static User currentUser;
     public List<Tweet> tweets = new ArrayList<Tweet>();
     public List<User> users = new ArrayList<User>();
+
     //private static final String FILENAME = "portfolio.json";
     static final String TAG = "MyTweetApp";
     //public DbHelper dbHelper = null;

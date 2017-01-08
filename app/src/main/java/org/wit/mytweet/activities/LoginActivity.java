@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static void onLoginSuccess() {
 
-            Intent tweetList = new Intent (mContext, TweetListActivity.class);
-        mContext.startActivity(tweetList);
+            Intent options = new Intent (mContext, OptionsActivity.class);
+        mContext.startActivity(options);
     }
 }

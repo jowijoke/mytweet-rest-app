@@ -26,6 +26,9 @@
         <activity
             android:name=".activities.SignupActivity"
             android:label="@string/title_activity_signup"></activity>
+        <activity
+            android:name=".activities.OptionsActivity"
+            android:label="@string/title_activity_options"></activity>
         <activity android:name=".activities.TweetPagerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
