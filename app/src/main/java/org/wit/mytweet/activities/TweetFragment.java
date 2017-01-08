@@ -147,6 +147,9 @@ public class TweetFragment extends Fragment implements Callback<Tweet>,TextWatch
                     });
 
                 }
+                else {
+                    navigateUp(getActivity());
+                }
                 return true;
 
             default:
