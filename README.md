@@ -26,12 +26,6 @@ By Default this app is designed to communicate with an API connected via localho
 
 4) aws: Configured website to used in AWS by connecting to mLab.
 
-## User/Admin Information
-Please be advised that all new users that wished to be registered must comply to the regex requirements.
-
-### Administer Details:
-#### Email: admin@wit.com
-#### Password: secret
 
 ###Users already on the database
 ## homer@simpson.com 
