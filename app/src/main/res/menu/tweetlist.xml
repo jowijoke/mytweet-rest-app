@@ -18,7 +18,6 @@
         app:showAsAction="always"
         android:title="@string/refresh"/>
 
-
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

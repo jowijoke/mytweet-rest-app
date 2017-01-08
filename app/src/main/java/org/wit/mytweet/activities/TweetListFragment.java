@@ -25,6 +25,7 @@ import org.wit.mytweet.activities.settings.SettingsActivity;
 import org.wit.mytweet.main.MyTweetApp;
 import org.wit.mytweet.models.Portfolio;
 import org.wit.mytweet.models.Tweet;
+import org.wit.mytweet.models.User;
 import org.wit.mytweet.sqlite.DbHelper;
 
 import java.util.ArrayList;
@@ -116,6 +117,7 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
                 return true;
 
             case R.id.action_clear:
+                deleteAllUserTweets();
                 portfolio.deleteAllTweets(tweets);
                 adapter.notifyDataSetChanged();
                 return true;
@@ -150,6 +152,28 @@ public class TweetListFragment extends ListFragment implements Callback<List<Twe
 
             @Override
             public void onFailure(Call<Tweet> call, Throwable t) {
+                Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void deleteAllUserTweets() {
+        Call<User> call = app.tweetService.deleteUserTweet(MyTweetApp.currentUser._id);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Tweet deleted", Toast.LENGTH_SHORT).show();
+                    retrieveTweets();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(getActivity(), "Tweet null returned due to incorrectly configured client", Toast.LENGTH_SHORT).show();
             }
         });
