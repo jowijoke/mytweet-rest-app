@@ -18,6 +18,7 @@
     <string name="title_activity_signup">Signup</string>
     <string name="title_activity_mytweet">MyTweet</string>
     <string name="refresh">Refresh Tweet List</string>
+    <string name="logout">Logout</string>
     <string name="social">Social List</string>
     <string name="signupRegister">Register</string>
     <string name="tweetButton">Tweet</string>

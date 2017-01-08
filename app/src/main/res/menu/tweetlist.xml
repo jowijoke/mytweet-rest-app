@@ -32,4 +32,11 @@
         app:showAsAction="never"
         android:title="@string/action_clear" />
 
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:background="@color/colorPrimary"
+        android:title="@string/logout" />
+
 </menu>
